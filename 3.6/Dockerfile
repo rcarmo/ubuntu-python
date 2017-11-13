@@ -13,7 +13,7 @@ RUN cd /tmp \
  && rm -rf /tmp/Python*
 
 # create some useful symlinks that are expected to exist
-RUN cd /usr/bin \
+RUN cd /usr/local/bin \
  && ln -sf easy_install-3.6 easy_install \
  && ln -sf idle3.6 idle \
  && ln -sf pydoc3.6 pydoc \
