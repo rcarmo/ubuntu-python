@@ -24,3 +24,10 @@ RUN apt update \
      wget \
      zlib1g-dev \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+ARG VCS_REF
+ARG VCS_URL
+ARG BUILD_DATE
+LABEL org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url=$VCS_URL \
+      org.label-schema.build-date=$BUILD_DATE

@@ -3,6 +3,13 @@ FROM rcarmo/ubuntu-python:3.6-${ARCH}
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 
+ARG VCS_REF
+ARG VCS_URL
+ARG BUILD_DATE
+LABEL org.label-schema.vcs-ref=$VCS_REF \
+      org.label-schema.vcs-url=$VCS_URL \
+      org.label-schema.build-date=$BUILD_DATE 
+
 # install requirements
 # this way when you build you won't need to install again
 # ans since COPY is cached we don't need to wait
