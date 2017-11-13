@@ -7,9 +7,11 @@ RUN apt update \
  && apt install -y \
      build-essential \
      libbz2-dev \
+     libexpat1-dev \
+     libffi-dev \
      libgdbm-dev \
-     liblapack-dev \
      libjpeg-dev \
+     liblapack-dev \
      libncurses5-dev \
      libreadline-dev \
      libssl-dev \
