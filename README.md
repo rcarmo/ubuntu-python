@@ -5,7 +5,7 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 
 ## Why
 
-`ubuntu-python` makes for awesome small containers, but it's a pain to deal with all the binary wheels related to machine/deep learning stuff like Tensorflow, `numpy`, etc., so I decided to bite the bullet and take on the extra bloat that comes with an Ubuntu distro.
+`alpine-python` makes for awesome small containers, but it's a pain to deal with all the binary wheels related to machine/deep learning stuff like Tensorflow, `numpy`, etc., so I decided to bite the bullet and take on the extra bloat that comes with an Ubuntu distro.
 
 
 ## Status & Roadmap
