@@ -1,6 +1,11 @@
 # ubuntu-python
 
-A base Docker container for running Python apps with an Ubuntu userland, based on [ubuntu-python](https://github.com/rcarmo/ubuntu-python)
+[![Docker Stars](https://img.shields.io/docker/stars/rcarmo/ubuntu-python.svg)](https://hub.docker.com/r/rcarmo/ubuntu-python)
+[![Docker Pulls](https://img.shields.io/docker/pulls/rcarmo/ubuntu-python.svg)](https://hub.docker.com/r/rcarmo/ubuntu-python)
+[![](https://images.microbadger.com/badges/image/rcarmo/ubuntu-python.svg)](https://microbadger.com/images/rcarmo/ubuntu-python "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/rcarmo/ubuntu-python.svg)](https://microbadger.com/images/rcarmo/ubuntu-python "Get your own version badge on microbadger.com")
+
+A base Docker container for running Python apps with an Ubuntu userland, based on [alpine-python](https://github.com/rcarmo/alpine-python)
 
 
 ## Why
