@@ -15,4 +15,4 @@ clean:
 	-docker rmi $$(docker images --format '{{.Repository}}:{{.Tag}}' | grep '$(IMAGE_NAME)')
 
 push:
-	docker push g$(IMAGE_NAME)
+	docker push $(IMAGE_NAME)
