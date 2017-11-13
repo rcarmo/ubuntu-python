@@ -1,4 +1,5 @@
-FROM rcarmo/ubuntu-python:3.6
+ARG ARCH=x86_64
+FROM rcarmo/ubuntu-python:3.6-${ARCH}
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 

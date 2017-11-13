@@ -20,7 +20,7 @@ RUN cd /usr/bin \
  && ln -sf python3.6 python \
  && ln -sf python-config3.6 python-config \
  && ln -sf pip3.6 pip \
- && pip install --upgrade pip
+ && pip3.6 install --upgrade pip
 
 # since we will be "always" mounting the volume, we can set this up
 CMD python
