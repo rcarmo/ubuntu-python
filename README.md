@@ -52,5 +52,6 @@ docker run --rm -v "$(pwd)":/home/app -w /home/app -p 5000:5000 -ti rcarmo/app
 
 ## Details
 
+* There is no `latest` tag - this is a feature, not a bug, because I prefer to tag my images with the architecture and build step purpose
 * Uses `make altinstall` to have Python 3.6 coexist with the built-in Ubuntu Python (which is nearly impossible to eradicate anyway)
 * Just like the main `python` docker image, it creates useful symlinks that are expected to exist, e.g. `python3.5` > `python`, `pip2.7` > `pip`, etc.)
