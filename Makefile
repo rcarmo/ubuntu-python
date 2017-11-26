@@ -16,6 +16,7 @@ build-userland:
 	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
 		--build-arg VCS_REF=$(VCS_REF) \
 		--build-arg VCS_URL=$(VCS_URL) \
+		--build-arg BASE=$(BASE) \
 		--build-arg ARCH=$(ARCH) \
 		-t $(IMAGE_NAME):userland-$(ARCH) userland
 

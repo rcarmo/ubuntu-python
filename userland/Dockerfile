@@ -1,5 +1,5 @@
-ARG ARCH
-FROM ${ARCH}
+ARG BASE
+FROM ${BASE}
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 
