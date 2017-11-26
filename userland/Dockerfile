@@ -1,4 +1,5 @@
-FROM ubuntu:16.04
+ARG ARCH
+FROM ${ARCH}
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 

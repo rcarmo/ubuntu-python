@@ -1,5 +1,11 @@
-export IMAGE_NAME=rcarmo/ubuntu-python
 export ARCH?=$(shell arch)
+ifneq (,$(findstring arm,$(ARCH)))
+export BASE=armv7/armhf-ubuntu:16.04
+export ARCH=armhf
+else
+export BASE=ubuntu:16.04
+endif
+export IMAGE_NAME=rcarmo/ubuntu-python
 export VCS_REF=`git rev-parse --short HEAD`
 export VCS_URL=https://github.com/rcarmo/ubuntu-python
 export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
