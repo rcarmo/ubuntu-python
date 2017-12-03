@@ -1,5 +1,5 @@
 ARG ARCH=x86_64
-FROM rcarmo/ubuntu-python:userland-${ARCH} as build-step
+FROM rcarmo/ubuntu-python:userland-${ARCH} as build-step-${ARCH}
 
 ARG PYTHON_VERSION=3.6.3
 ARG MAJOR_VERSION=3.6
@@ -27,8 +27,8 @@ RUN cd /tmp \
  && make altinstall \
  && rm -rf /tmp/Python*
 
-
-FROM build-step as cleanup
+ARG ARCH=x86_64
+FROM build-step-${ARCH} as cleanup-${ARCH}
 
 # dynamic library bindings, symlink creation and test removal
 RUN ldconfig -v \
