@@ -1,6 +1,7 @@
 ARG ARCH=x86_64
 ARG VERSION=${MAJOR_VERSION}.3
 ARG MAJOR_VERSION=${MAJOR_VERSION}
+ARG CORES=4
 FROM rcarmo/ubuntu-python:userland-${ARCH}
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
@@ -11,8 +12,12 @@ RUN cd /tmp \
  && cd Python-${VERSION} \
  && ./configure \
     --with-lto \
+    --with-system-ffi \
+    --with-system-expat \
     --enable-optimizations \
- && make -j8 \
+    --enable-shared \
+    --enable-loadable-sqlite-extensions \
+ && make -j${CORES} \
  && make altinstall \
  && rm -rf /tmp/Python*
 
