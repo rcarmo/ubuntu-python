@@ -13,6 +13,7 @@ RUN apt-get update \
      libgdbm-dev \
      libjpeg-dev \
      liblapack-dev \
+     liblzma-dev \
      libncurses5-dev \
      libreadline-dev \
      libssl-dev \
