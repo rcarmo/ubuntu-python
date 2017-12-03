@@ -1,11 +1,11 @@
 ARG BASE
-FROM ${BASE}
+FROM ${BASE} as base
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 
-RUN apt update \
- && apt dist-upgrade -y \
- && apt install -y \
+RUN apt-get update \
+ && apt-get dist-upgrade -y \
+ && apt-get install -y \
      build-essential \
      libbz2-dev \
      libexpat1-dev \
