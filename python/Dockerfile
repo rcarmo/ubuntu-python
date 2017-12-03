@@ -17,12 +17,26 @@ RUN cd /tmp \
     --with-lto \
     --with-system-ffi \
     --with-system-expat \
+    --enable-ipv6 \
+    --enable-unicode=ucs4 \
     --enable-optimizations \
     --enable-shared \
     --enable-loadable-sqlite-extensions \
  && make -j${CORES} \
  && make altinstall \
  && rm -rf /tmp/Python*
+
+# ddynamic library bindings and test removal
+RUN ldconfig -v \
+ && find /usr/local \
+    \( -type d -and -name test -or -name tests \) -or \
+    \( -type f -and -name '*.pyc' -or -name '*.pyo' -or -name 'idle*'\) \
+    -exec rm -rf {} \
+ && find /var/lib/apt/lists \
+         /usr/share/man \
+         /usr/share/doc \
+         /var/log \
+    -type f -exec rm -rf {} \
 
 # create some useful symlinks that are expected to exist
 RUN cd /usr/local/bin \
