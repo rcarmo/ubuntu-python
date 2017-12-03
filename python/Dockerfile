@@ -27,8 +27,16 @@ RUN cd /tmp \
  && make altinstall \
  && rm -rf /tmp/Python*
 
-# ddynamic library bindings and test removal
+# dynamic library bindings, symlink creation and test removal
 RUN ldconfig -v \
+ && cd /usr/local/bin \
+ && ln -sf easy_install-${MAJOR_VERSION} easy_install \
+ && ln -sf idle${MAJOR_VERSION} idle \
+ && ln -sf pydoc${MAJOR_VERSION} pydoc \
+ && ln -sf python${MAJOR_VERSION} python \
+ && ln -sf python-config${MAJOR_VERSION} python-config \
+ && ln -sf pip${MAJOR_VERSION} pip \
+ && pip${MAJOR_VERSION} install --upgrade pip \
  && find /usr/local \
     \( -type d -and \(-name test -or -name tests -or -name __pycache__ \) \) -or \
     \( -type f -and \(-name '*.pyc' -or -name '*.pyo' -or -name 'idle*'\) \) \
@@ -37,17 +45,7 @@ RUN ldconfig -v \
          /usr/share/man \
          /usr/share/doc \
          /var/log \
-    -type f -exec rm -rf {} \
-
-# create some useful symlinks that are expected to exist
-RUN cd /usr/local/bin \
- && ln -sf easy_install-${MAJOR_VERSION} easy_install \
- && ln -sf idle${MAJOR_VERSION} idle \
- && ln -sf pydoc${MAJOR_VERSION} pydoc \
- && ln -sf python${MAJOR_VERSION} python \
- && ln -sf python-config${MAJOR_VERSION} python-config \
- && ln -sf pip${MAJOR_VERSION} pip \
- && pip${MAJOR_VERSION} install --upgrade pip
+    -type f -exec rm -rf {} 
 
 ARG VCS_REF
 ARG VCS_URL
