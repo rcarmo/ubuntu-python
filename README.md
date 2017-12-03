@@ -18,7 +18,7 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 * [ ] Multi-stage, "stripped" builds (requires some tuning of the `onbuild` images)
 * [ ] Travis CI builds
 * [x] LTO (experimental) optimizations, inspired by [revsys](https://github.com/revsys/optimized-python-docker)
-* [x] Initial `arm` containers
+* [x] Initial `armhf` containers
 * [x] Initial `x86_64` containers, plain + `onbuild`
 * [x] Python 3.6.3 (`x86_64`)
 * [x] Scaffolding for multiarch builds
