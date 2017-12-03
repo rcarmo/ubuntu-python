@@ -10,10 +10,12 @@ MAINTAINER Rui Carmo https://github.com/rcarmo
 ENV LANG C.UTF-8
 
 RUN cd /tmp \
+ && TARGET_ARCH="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
  && wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
  && tar xvf Python-${PYTHON_VERSION}.tgz \
  && cd Python-${PYTHON_VERSION} \
  && ./configure \
+    --build="$TARGET_ARCH" \
     --with-lto \
     --with-system-ffi \
     --with-system-expat \
