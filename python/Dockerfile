@@ -29,8 +29,8 @@ RUN cd /tmp \
 # ddynamic library bindings and test removal
 RUN ldconfig -v \
  && find /usr/local \
-    \( -type d -and -name test -or -name tests \) -or \
-    \( -type f -and -name '*.pyc' -or -name '*.pyo' -or -name 'idle*'\) \
+    \( -type d -and \(-name test -or -name tests -or -name __pycache__ \) \) -or \
+    \( -type f -and \(-name '*.pyc' -or -name '*.pyo' -or -name 'idle*'\) \) \
     -exec rm -rf {} \
  && find /var/lib/apt/lists \
          /usr/share/man \
