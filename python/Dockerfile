@@ -2,7 +2,7 @@ ARG ARCH=x86_64
 ARG VERSION=${MAJOR_VERSION}.3
 ARG MAJOR_VERSION=${MAJOR_VERSION}
 ARG CORES=4
-FROM rcarmo/ubuntu-python:userland-${ARCH}
+FROM rcarmo/ubuntu-python:userland-${ARCH} as userland
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 
