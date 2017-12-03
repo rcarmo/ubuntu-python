@@ -28,7 +28,7 @@ build:
 		--build-arg VCS_URL=$(VCS_URL) \
 		--build-arg ARCH=$(ARCH) \
 		--build-arg MAJOR_VERSION=$(MAJOR_VERSION) \
-		--build-arg VERSION=$(PYTHON_VERSION) \
+		--build-arg PYTHON_VERSION=$(PYTHON_VERSION) \
 		--build-arg CORES=$(CORES) \
 		-t $(IMAGE_NAME):$(MAJOR_VERSION)-$(ARCH) python
 	docker tag $(IMAGE_NAME):$(MAJOR_VERSION)-$(ARCH) $(IMAGE_NAME):$(PYTHON_VERSION)-$(ARCH)

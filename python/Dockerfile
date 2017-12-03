@@ -41,7 +41,8 @@ RUN ldconfig -v \
 
 ARG MAJOR_VERSION=3.6
 # symlink creation
-RUN ln -sf easy_install-${MAJOR_VERSION} easy_install \
+RUN cd /usr/local/bin \
+ && ln -sf easy_install-${MAJOR_VERSION} easy_install \
  && ln -sf idle${MAJOR_VERSION} idle \
  && ln -sf pydoc${MAJOR_VERSION} pydoc \
  && ln -sf python${MAJOR_VERSION} python \
