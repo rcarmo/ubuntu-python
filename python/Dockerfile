@@ -20,7 +20,6 @@ RUN cd /tmp \
     --with-system-ffi \
     --with-system-expat \
     --enable-ipv6 \
-    --enable-unicode=ucs4 \
     --enable-optimizations \
     --enable-shared \
     --enable-loadable-sqlite-extensions \
