@@ -1,5 +1,5 @@
 ARG ARCH=x86_64
-FROM rcarmo/ubuntu-python:userland-${ARCH} as userland
+FROM rcarmo/ubuntu-python:userland-${ARCH} as build-step
 
 ARG PYTHON_VERSION=3.6.3
 ARG MAJOR_VERSION=3.6
@@ -27,6 +27,9 @@ RUN cd /tmp \
  && make altinstall \
  && rm -rf /tmp/Python*
 
+
+FROM build-step as cleanup
+
 # dynamic library bindings, symlink creation and test removal
 RUN ldconfig -v \
  && cd /usr/local/bin \
@@ -37,9 +40,9 @@ RUN ldconfig -v \
  && ln -sf python-config${MAJOR_VERSION} python-config \
  && ln -sf pip${MAJOR_VERSION} pip \
  && pip${MAJOR_VERSION} install --upgrade pip \
- && find /usr/local \
-    \( -type d -and \(-name test -or -name tests -or -name __pycache__ \) \) -or \
-    \( -type f -and \(-name '*.pyc' -or -name '*.pyo' -or -name 'idle*'\) \) \
+ && find /usr/local -depth \
+    \( \( -type d -and \(-name test -or -name tests -or -name __pycache__ \) \) -or \
+       \( -type f -and \(-name '*.pyc' -or -name '*.pyo' \) \) -or \( -name 'idle*' \) \) \
     -exec rm -rf {} \
  && find /var/lib/apt/lists \
          /usr/share/man \
