@@ -1,15 +1,18 @@
 ARG ARCH=x86_64
-ARG VERSION=3.6.3
+FROM rcarmo/ubuntu-python:userland-${ARCH} as userland
+
+ARG PYTHON_VERSION=3.6.3
 ARG MAJOR_VERSION=3.6
 ARG CORES=4
-FROM rcarmo/ubuntu-python:userland-${ARCH} as userland
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 
+ENV LANG C.UTF-8
+
 RUN cd /tmp \
- && wget https://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz \
- && tar xvf Python-${VERSION}.tgz \
- && cd Python-${VERSION} \
+ && wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz \
+ && tar xvf Python-${PYTHON_VERSION}.tgz \
+ && cd Python-${PYTHON_VERSION} \
  && ./configure \
     --with-lto \
     --with-system-ffi \

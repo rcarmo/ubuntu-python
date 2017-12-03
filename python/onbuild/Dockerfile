@@ -1,6 +1,6 @@
 ARG ARCH=x86_64
 ARG MAJOR_VERSION=3.6
-FROM rcarmo/ubuntu-python:${MAJOR_VERSION}-${ARCH}
+FROM rcarmo/ubuntu-python:${MAJOR_VERSION}-${ARCH} as runtime
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 

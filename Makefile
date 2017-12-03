@@ -10,7 +10,7 @@ export VCS_REF=`git rev-parse --short HEAD`
 export VCS_URL=https://github.com/rcarmo/ubuntu-python
 export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
 export MAJOR_VERSION=3.6
-export VERSION=3.6.3
+export PYTHON_VERSION=3.6.3
 export CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
 all: build-userland build build-onbuild push
@@ -29,10 +29,10 @@ build:
 		--build-arg VCS_URL=$(VCS_URL) \
 		--build-arg ARCH=$(ARCH) \
 		--build-arg MAJOR_VERSION=$(MAJOR_VERSION) \
-		--build-arg VERSION=$(VERSION) \
+		--build-arg VERSION=$(PYTHON_VERSION) \
 		--build-arg CORES=$(CORES) \
 		-t $(IMAGE_NAME):$(MAJOR_VERSION)-$(ARCH) python
-	docker tag $(IMAGE_NAME):$(MAJOR_VERSION)-$(ARCH) $(IMAGE_NAME):$(VERSION)-$(ARCH)
+	docker tag $(IMAGE_NAME):$(MAJOR_VERSION)-$(ARCH) $(IMAGE_NAME):$(PYTHON_VERSION)-$(ARCH)
 
 build-onbuild:
 	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
@@ -51,4 +51,4 @@ push:
 	docker push $(IMAGE_NAME)
 
 test:
-	docker run -ti $(IMAGE_NAME):$(VERSION)-$(ARCH)
+	docker run -ti $(IMAGE_NAME):$(PYTHON_VERSION)-$(ARCH)
