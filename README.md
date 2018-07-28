@@ -17,6 +17,9 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 
 * [ ] Multi-stage, "stripped" builds (requires some tuning of the `onbuild` images)
 * [ ] Travis CI builds
+* [x] Normalize architecture tags (`arm32v7`, `amd64`, etc. to match Docker naming conventions)
+* [x] Python 3.7.0
+* [x] Move to Ubuntu 18.04 base image
 * [x] LTO (experimental) optimizations, inspired by [revsys](https://github.com/revsys/optimized-python-docker)
 * [x] Initial `armhf` containers
 * [x] Initial `x86_64` containers, plain + `onbuild`
@@ -29,12 +32,12 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 
 This image runs the `python` command on `docker run`. You can either specify your own command, e.g:
 ```shell
-docker run --rm -ti rcarmo/ubuntu-python:3.6-x86_64 python hello.py
+docker run --rm -ti rcarmo/ubuntu-python:3.7-amd64 python hello.py
 ```
 
 Or extend this image using your custom `Dockerfile`, e.g:
 ```dockerfile
-FROM rcarmo/ubuntu-python:3.6-onbuild-x86_64
+FROM rcarmo/ubuntu-python:3.7-onbuild-amd64
 
 # for a flask server
 EXPOSE 5000
@@ -48,7 +51,7 @@ docker build --rm=true -t rcarmo/app .
 
 You can also access `bash` inside the container:
 ```shell
-docker run --rm -ti rcarmo/ubuntu-python:3.6-x86_64 /bin/bash
+docker run --rm -ti rcarmo/ubuntu-python:3.7-amd64 /bin/bash
 ```
 
 Another option is to build an extended `Dockerfile` version (like shown above), and mount your application inside the container:

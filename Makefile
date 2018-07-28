@@ -1,16 +1,20 @@
 export ARCH?=$(shell arch)
-ifneq (,$(findstring arm,$(ARCH)))
-export BASE=armv7/armhf-ubuntu:16.04
-export ARCH=armhf
+ifneq (,$(findstring armv6,$(ARCH)))
+export BASE=arm32v6/ubuntu:18.04
+export ARCH=arm32v6
+else ifneq (,$(findstring armv7,$(ARCH)))
+export BASE=arm32v7/ubuntu:18.04
+export ARCH=arm32v7
 else
-export BASE=ubuntu:16.04
+export BASE=ubuntu:18.04
+export ARCH=amd64
 endif
 export IMAGE_NAME=rcarmo/ubuntu-python
 export VCS_REF=`git rev-parse --short HEAD`
 export VCS_URL=https://github.com/rcarmo/ubuntu-python
 export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-export MAJOR_VERSION=3.6
-export PYTHON_VERSION=3.6.4
+export MAJOR_VERSION=3.7
+export PYTHON_VERSION=3.7.0
 export CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
 all: build-userland build build-onbuild push
@@ -45,6 +49,10 @@ clean:
 	-docker rm -v $$(docker ps -a -q -f status=exited)
 	-docker rmi $$(docker images -q -f dangling=true)
 	-docker rmi $$(docker images --format '{{.Repository}}:{{.Tag}}' | grep '$(IMAGE_NAME)')
+
+manifest:
+	docker manifest create  $(IMAGE_NAME):$(MAJOR_VERSION)-onbuild-amd64 \
+				$(IMAGE_NAME):$(MAJOR_VERSION)-onbuild-arm32v7
 
 push:
 	docker push $(IMAGE_NAME)
