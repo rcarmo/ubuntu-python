@@ -17,6 +17,7 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 
 * [ ] Multi-stage, "stripped" builds (requires some tuning of the `onbuild` images)
 * [ ] Travis CI builds
+* [x] Python 3.7.3
 * [x] Normalize architecture tags (`arm32v7`, `amd64`, etc. to match Docker naming conventions)
 * [x] Python 3.7.0
 * [x] Move to Ubuntu 18.04 base image
