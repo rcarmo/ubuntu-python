@@ -14,7 +14,7 @@ export VCS_REF=`git rev-parse --short HEAD`
 export VCS_URL=https://github.com/rcarmo/ubuntu-python
 export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
 export MAJOR_VERSION=3.7
-export PYTHON_VERSION=3.7.0
+export PYTHON_VERSION=3.7.3
 export CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
 all: build-userland build build-onbuild push
