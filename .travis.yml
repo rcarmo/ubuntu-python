@@ -1,0 +1,21 @@
+language: minimal
+sudo: required
+addons:
+  apt:
+    packages:
+      - docker-ce # use experimental features
+
+services:
+  - docker
+before_install:
+  - docker --version  # document the version travis is using
+  - echo '{"experimental":true}' | sudo tee /etc/docker/daemon.json
+  - mkdir -p $HOME/.docker && echo '{"experimental":"enabled"}' | tee $HOME/.docker/config.json
+  - sudo service docker restart
+
+jobs:
+  include:
+    - stage: 3.7
+      script:
+        - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+        - make all

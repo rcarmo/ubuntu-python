@@ -4,9 +4,9 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/rcarmo/ubuntu-python.svg)](https://hub.docker.com/r/rcarmo/ubuntu-python)
 [![](https://images.microbadger.com/badges/image/rcarmo/ubuntu-python.svg)](https://microbadger.com/images/rcarmo/ubuntu-python "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/rcarmo/ubuntu-python.svg)](https://microbadger.com/images/rcarmo/ubuntu-python "Get your own version badge on microbadger.com")
+[![Build Status](https://travis-ci.org/insightfulsystems/alpine-python.svg?branch=master)](https://travis-ci.org/rcarmo/ubuntu-python)
 
-A base Docker container for running Python apps with an Ubuntu userland, based on [alpine-python](https://github.com/rcarmo/alpine-python)
-
+A base Docker container for running Python apps with an Ubuntu userland, based on [alpine-python](https://github.com/rcarmo/alpine-python) but for `amd64` only
 
 ## Why
 
@@ -16,7 +16,9 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 ## Status & Roadmap
 
 * [ ] Multi-stage, "stripped" builds (requires some tuning of the `onbuild` images)
-* [ ] Travis CI builds
+* [ ] Multi-arch builds
+* [x] Travis CI builds (WIP)
+* [x] Python 3.7.5
 * [x] Python 3.7.3
 * [x] Normalize architecture tags (`arm32v7`, `amd64`, etc. to match Docker naming conventions)
 * [x] Python 3.7.0
