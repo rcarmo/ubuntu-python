@@ -1,15 +1,6 @@
-export ARCH?=$(shell arch)
-ifneq (,$(findstring armv6,$(ARCH)))
-export BASE=arm32v6/ubuntu:18.04
-export ARCH=arm32v6
-else ifneq (,$(findstring armv7,$(ARCH)))
-export BASE=arm32v7/ubuntu:18.04
-export ARCH=arm32v7
-else
-export BASE=ubuntu:18.04
-export ARCH=amd64
-endif
 export QEMU_VERSION=4.2.0-4
+export BASE_IMAGE=ubuntu:18.04
+export BUILD_IMAGE=local/ubuntu-base
 export IMAGE_NAME=rcarmo/ubuntu-python
 export VCS_REF=`git rev-parse --short HEAD`
 export VCS_URL=https://github.com/rcarmo/ubuntu-python
@@ -41,6 +32,34 @@ fetch-qemu-%:
 
 all: build-userland build build-onbuild push
 
+wrap:
+	@echo "==> Building local base containers"
+	$(foreach ARCH, $(TARGET_ARCHITECTURES), make wrap-$(ARCH);)
+	@echo "==> Done."
+
+wrap-amd64:
+	docker pull amd64/$(BASE_IMAGE):$(ALPINE_VERSION)
+	docker tag amd64/$(BASE_IMAGE):$(ALPINE_VERSION) $(BUILD_IMAGE):amd64
+
+wrap-translate-%: 
+	@if [[ "$*" == "arm64v8" ]] ; then \
+	   echo "aarch64"; \
+	else \
+		echo "arm"; \
+	fi 
+
+wrap-%:
+	$(eval ARCH := $*)
+	@echo "--> Building local base container for $(ARCH)"
+	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
+		--build-arg ARCH=$(shell make -s wrap-translate-$(ARCH)) \
+		--build-arg BASE=$(ARCH)/$(BASE_IMAGE):$(ALPINE_VERSION) \
+		--build-arg VCS_REF=$(VCS_REF) \
+		--build-arg VCS_URL=$(VCS_URL) \
+		-t $(BUILD_IMAGE):$(ARCH) qemu
+	@echo "--> Done building local base container for $(ARCH)"
+
+
 build-userland:
 	$(foreach arch, $(TARGET_ARCHITECTURES), make build-userland-$(arch);)
 
@@ -50,7 +69,7 @@ build-userland-%:
 	docker build --build-arg BUILD_DATE=$(BUILD_DATE) \
 		--build-arg VCS_REF=$(VCS_REF) \
 		--build-arg VCS_URL=$(VCS_URL) \
-		--build-arg BASE=$(BASE) \
+		--build-arg BASE=$(BUILD_IMAGE):$(ARCH) \
 		-t $(IMAGE_NAME):userland-$(ARCH) userland
 	@echo "--> Done building userland container for $(ARCH)"
 
