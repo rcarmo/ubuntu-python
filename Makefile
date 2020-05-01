@@ -38,8 +38,8 @@ wrap:
 	@echo "==> Done."
 
 wrap-amd64:
-	docker pull amd64/$(BASE_IMAGE):$(ALPINE_VERSION)
-	docker tag amd64/$(BASE_IMAGE):$(ALPINE_VERSION) $(BUILD_IMAGE):amd64
+	docker pull amd64/$(BASE_IMAGE)
+	docker tag amd64/$(BASE_IMAGE) $(BUILD_IMAGE):amd64
 
 wrap-translate-%: 
 	@if [[ "$*" == "arm64v8" ]] ; then \
