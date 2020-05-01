@@ -13,8 +13,8 @@ export IMAGE_NAME=rcarmo/ubuntu-python
 export VCS_REF=`git rev-parse --short HEAD`
 export VCS_URL=https://github.com/rcarmo/ubuntu-python
 export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
-export MAJOR_VERSION=3.7
-export PYTHON_VERSION=3.7.5
+export MAJOR_VERSION=3.8
+export PYTHON_VERSION=3.8.2
 export CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 
 all: build-userland build build-onbuild push
