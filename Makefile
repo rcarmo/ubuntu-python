@@ -9,6 +9,7 @@ export TARGET_ARCHITECTURES=amd64 arm32v7 arm32v6
 export MAJOR_VERSION=3.8
 export PYTHON_VERSION=3.8.2
 export CORES=`cat /proc/cpuinfo | grep processor | wc -l`
+export SHELL=/bin/bash
 
 .PHONY: qemu wrap node push manifest clean
 
