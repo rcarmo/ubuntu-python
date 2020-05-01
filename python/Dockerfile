@@ -1,4 +1,4 @@
-ARG ARCH=x86_64
+ARG ARCH
 FROM rcarmo/ubuntu-python:userland-${ARCH} as build-step
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
