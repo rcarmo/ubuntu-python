@@ -51,8 +51,14 @@ clean:
 	-docker rmi $$(docker images --format '{{.Repository}}:{{.Tag}}' | grep '$(IMAGE_NAME)')
 
 manifest:
-	docker manifest create  $(IMAGE_NAME):$(MAJOR_VERSION)-onbuild-amd64 \
-				$(IMAGE_NAME):$(MAJOR_VERSION)-onbuild-arm32v7
+	docker manifest create --amend \
+		$(IMAGE_NAME):$(MAJOR_VERSION)-onbuild-amd64 \
+		$(IMAGE_NAME):$(MAJOR_VERSION)-onbuild-arm32v7
+	docker manifest annotate \
+		$(IMAGE_NAME):latest \
+		$(IMAGE_NAME):$(MAJOR_VERSION)-onbuild-amd64 \
+		$(IMAGE_NAME):$(MAJOR_VERSION)-onbuild-arm32v7
+	docker manifest push $(IMAGE_NAME):latest
 
 push:
 	docker push $(IMAGE_NAME)
