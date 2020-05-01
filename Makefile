@@ -12,7 +12,7 @@ export PYTHON_VERSION=3.8.2
 export CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 export SHELL=/bin/bash
 
-.PHONY: qemu wrap node push manifest clean
+.PHONY: qemu wrap build-userland build build-onbuild push manifest clean
 
 qemu:
 	@echo "==> Setting up QEMU"
@@ -32,7 +32,7 @@ fetch-qemu-%:
 	cp qemu-$(ARCH)-static ../qemu/
 	@echo "--> Done."
 
-all: build-userland build build-onbuild push
+all: qemu wrap build-userland build build-onbuild push manifest
 
 wrap:
 	@echo "==> Building local base containers"
