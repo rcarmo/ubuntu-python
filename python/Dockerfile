@@ -3,8 +3,8 @@ FROM rcarmo/ubuntu-python:userland-${ARCH} as build-step
 
 MAINTAINER Rui Carmo https://github.com/rcarmo
 
-ARG PYTHON_VERSION=3.6.3
-ARG CORES=4
+ARG PYTHON_VERSION
+ARG CORES
 ENV LANG C.UTF-8
 RUN cd /tmp \
  && TARGET_ARCH="$(dpkg-architecture --query DEB_BUILD_GNU_TYPE)" \
@@ -39,7 +39,7 @@ RUN ldconfig -v \
          /var/log \
     -type f -exec rm -rf '{}' +
 
-ARG MAJOR_VERSION=3.6
+ARG MAJOR_VERSION
 # symlink creation
 RUN cd /usr/local/bin \
  && ln -sf easy_install-${MAJOR_VERSION} easy_install \
