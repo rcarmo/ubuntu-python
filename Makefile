@@ -93,7 +93,7 @@ build-%:
 	@echo "--> Done building base container for $(ARCH)"
 
 build-onbuild:
-	$(foreach arch, $(TARGET_ARCHITECTURES), make build-$(arch));
+	$(foreach arch, $(TARGET_ARCHITECTURES), make build-onbuild-$(arch);)
 
 build-onbuild-%:
 	$(eval ARCH := $*)
