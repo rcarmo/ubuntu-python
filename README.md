@@ -4,19 +4,21 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/rcarmo/ubuntu-python.svg)](https://hub.docker.com/r/rcarmo/ubuntu-python)
 [![](https://images.microbadger.com/badges/image/rcarmo/ubuntu-python.svg)](https://microbadger.com/images/rcarmo/ubuntu-python "Get your own image badge on microbadger.com")
 [![](https://images.microbadger.com/badges/version/rcarmo/ubuntu-python.svg)](https://microbadger.com/images/rcarmo/ubuntu-python "Get your own version badge on microbadger.com")
-[![Build Status](https://travis-ci.org/insightfulsystems/alpine-python.svg?branch=master)](https://travis-ci.org/rcarmo/ubuntu-python)
 
-A base Docker container for running Python apps with an Ubuntu userland, based on [alpine-python](https://github.com/rcarmo/alpine-python) but for `amd64` only
+A base Docker container for running Python apps with an Ubuntu userland, based on [alpine-python](https://github.com/rcarmo/alpine-python) and build for three different architectures:
+
+* `amd64`
+* `arm32v7` (Pi 2+ or other ARM 32-bit boards like the ODROID U2+)
+* `arm64v8` (Pi 4 or other ARM 64-bit boards, as well as the WSL images for Windows on ARM)
 
 ## Why
 
 `alpine-python` makes for awesome small containers, but it's a pain to deal with all the binary wheels related to machine/deep learning stuff like Tensorflow, `numpy`, etc., so I decided to bite the bullet and take on the extra bloat that comes with an Ubuntu distro.
 
-
 ## Status & Roadmap
 
 * [ ] Multi-stage, "stripped" builds (requires some tuning of the `onbuild` images)
-* [ ] Multi-arch builds
+* [x] Multi-arch builds
 * [ ] CI builds (WIP due to long build times - Travis errors out)
 * [x] Python 3.8.2
 * [x] Python 3.7.5
