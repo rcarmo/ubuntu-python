@@ -28,8 +28,8 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 * [x] Move to Ubuntu 18.04 base image
 * [x] LTO (experimental) optimizations, inspired by [revsys](https://github.com/revsys/optimized-python-docker)
 * [x] Initial `armhf` containers
-* [x] Initial `x86_64` containers, plain + `onbuild`
-* [x] Python 3.6.3 (`x86_64`)
+* [x] Initial `amd64` containers, plain + `onbuild`
+* [x] Python 3.6.3 (`amd64`)
 * [x] Scaffolding for multiarch builds
 * [x] Base userland with required libraries for building Python 3.6
 
@@ -38,12 +38,13 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 
 This image runs the `python` command on `docker run`. You can either specify your own command, e.g:
 ```shell
-docker run --rm -ti rcarmo/ubuntu-python:3.7-amd64 python hello.py
+docker run --rm -ti rcarmo/ubuntu-python python hello.py
 ```
 
 Or extend this image using your custom `Dockerfile`, e.g:
 ```dockerfile
-FROM rcarmo/ubuntu-python:3.7-onbuild-amd64
+FROM rcarmo/ubuntu-python:onbuild
+# or FROM rcarmo/ubuntu-python:3.8-onbuild-amd64 if you prefer to specify your architecture
 
 # for a flask server
 EXPOSE 5000
@@ -57,7 +58,7 @@ docker build --rm=true -t rcarmo/app .
 
 You can also access `bash` inside the container:
 ```shell
-docker run --rm -ti rcarmo/ubuntu-python:3.7-amd64 /bin/bash
+docker run --rm -ti rcarmo/ubuntu-python /bin/bash
 ```
 
 Another option is to build an extended `Dockerfile` version (like shown above), and mount your application inside the container:
@@ -67,7 +68,7 @@ docker run --rm -v "$(pwd)":/home/app -w /home/app -p 5000:5000 -ti rcarmo/app
 
 ## Details
 
-* Builds with optimizations enabled, for a significant performance boost
-* There is no `latest` tag - this is a feature, not a bug, because I prefer to tag my images with the architecture and build step purpose
-* Uses `make altinstall` to have Python 3.6 coexist with the built-in Ubuntu Python (which is nearly impossible to eradicate anyway)
-* Just like the main `python` docker image, it creates useful symlinks that are expected to exist, e.g. `python3.6` > `python`, `pip3.6` > `pip`, etc.)
+* Builds the Python interpreter with optimizations enabled, for a significant performance boost
+* You can use the `latest` or `onbuild` tags, but every variant is tagged with its architecture and build step purpose
+* Uses `make altinstall` to have Python 3.8 coexist with the built-in Ubuntu Python (which is nearly impossible to eradicate anyway)
+* Just like the main `python` docker image, it creates useful symlinks that are expected to exist, e.g. `python3.8` > `python`, `pip3.8` > `pip`, etc.)
