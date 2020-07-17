@@ -8,7 +8,7 @@ export BUILD_DATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
 export TARGET_ARCHITECTURES=amd64 arm32v7 arm64v8
 export QEMU_ARCHITECTURES=arm aarch64
 export MAJOR_VERSION=3.8
-export PYTHON_VERSION=3.8.2
+export PYTHON_VERSION=3.8.4
 export CORES=`cat /proc/cpuinfo | grep processor | wc -l`
 export SHELL=/bin/bash
 
