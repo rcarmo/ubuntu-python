@@ -20,7 +20,7 @@ A base Docker container for running Python apps with an Ubuntu userland, based o
 * [ ] Multi-stage, "stripped" builds (requires some tuning of the `onbuild` images)
 * [x] Multi-arch builds
 * [ ] CI builds (WIP due to long build times - Travis errors out)
-* [x] Python 3.8.2
+* [x] Python 3.8.5
 * [x] Python 3.7.5
 * [x] Python 3.7.3
 * [x] Normalize architecture tags (`arm32v7`, `amd64`, etc. to match Docker naming conventions)
