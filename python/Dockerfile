@@ -18,7 +18,6 @@ RUN cd /tmp \
     --with-system-expat \
     --enable-ipv6 \
     --enable-optimizations \
-    --enable-shared \
     --enable-loadable-sqlite-extensions \
  && make -j${CORES} \
  && make altinstall \
